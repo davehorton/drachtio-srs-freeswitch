@@ -1,0 +1,26 @@
+{
+  "drachtio": {
+    "host": "127.0.0.1",
+    "port": 9022,
+    "secret": "cymru"
+  },
+  "freeswitch": {
+    "url": "sip:record-$1-$2@10.0.0.1:5038"
+  },
+  "logging": {
+    "transports": [
+      {
+        "filename": "console",
+        "level": "debug",
+        "handleExceptions": true
+      },
+      {
+        "filename": "/tmp/srs-freeswitch.txt",
+        "level": "info",
+        "handleExceptions": true,
+        "json": false
+      }
+    ],
+    "exitOnError": false
+  }
+}
