@@ -1,0 +1,23 @@
+{
+  "name": "srs-freeswitch",
+  "version": "0.0.1",
+  "description": "A simple SIPREC recording server",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "SIPREC",
+    "drachtio",
+    "sip"
+  ],
+  "author": "Dave Horton",
+  "license": "MIT",
+  "dependencies": {
+    "async": "^2.3.0",
+    "drachtio": "^1.0.17",
+    "drachtio-srf": "^3.0.12",
+    "winston": "^2.3.1",
+    "xml2js": "^0.4.17"
+  }
+}
