@@ -64,7 +64,14 @@ srf.invite( (req, res) => {
     // combine payloads and respond to SRC with 200 OK
     (sessionId, part1, sdp1, part2, sdp2, dialogs, callback) => {
       let sdp = parser.combinePayloads( dialogs[0].dlg.remote.sdp, dialogs[1].dlg.remote.sdp ) ;
-      srf.createUasDialog( req, res, { localSdp: sdp }, (err, dlg) => {
+      const options = {
+        localSdp: sdp,
+        headers: {
+          'Contact': `<sip:${config.drachtio.publicIp}:5060;transport=tcp>`
+        }
+      };
+
+      srf.createUasDialog( req, res, options, (err, dlg) => {
         if( err ) { return callback(err); }
         callback(null, dlg);
       });

@@ -2,7 +2,8 @@
   "drachtio": {
     "host": "127.0.0.1",
     "port": 9022,
-    "secret": "cymru"
+    "secret": "cymru",
+    "publicIp" : ""
   },
   "freeswitch": {
     "url": "sip:record-$1-$2@10.0.0.1:5038"
