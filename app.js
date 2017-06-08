@@ -1,15 +1,15 @@
 const drachtio = require('drachtio') ;
 const app = drachtio() ;
-const Srf = require('drachtio-srf'); 
+const Srf = require('drachtio-srf');
 const srf = new Srf(app);
 const config = require('./config');
-const Logger = require('./lib/logger'); 
+const Logger = require('./lib/logger');
 const logger = new Logger( config.logging ) ;
 const MultipartParser = require('./lib/multipart-parser.js');
 const forkStreams = require('./lib/fork-streams') ;
 const async = require('async') ;
 
-srf.connect( config.drachtio ) 
+srf.connect( config.drachtio )
 .on('connect', (err, hostport) => { logger.info(`connected to drachtio listening on ${hostport}`) ;})
 .on('error', (err) => { logger.error(`Error connecting to drachtio at ${config.drachtio}`, err) ; }) ;
 
@@ -17,7 +17,7 @@ srf.locals.logger = logger ;
 
 srf.use('invite', (req, res, next) => {
   logger.info(`${req.get('Call-Id')}: received call from ${req.callingNumber}`);
-  req.on('cancel', () => { 
+  req.on('cancel', () => {
     logger.info(`call canceled by caller`);
     req.canceled = true ;
   }) ;
@@ -41,9 +41,9 @@ srf.invite( (req, res) => {
     (callback) => {
       parser.splitPayloads( (err, fullSdp, sdp1, sdp2, recordingData) => {
         if( err ) { return callback(err); }
-        let sessionId = recordingData['tns:recording']['tns:session'][0].$.session_id ;
-        let part1 = recordingData['tns:recording']['tns:participant'][0].$.participant_id;
-        let part2 = recordingData['tns:recording']['tns:participant'][1].$.participant_id ;
+        let sessionId = recordingData.recording.session[0].$.session_id;
+        let part1 = recordingData.recording.participant[0].$.participant_id;
+        let part2 = recordingData.recording.participant[1].$.participant_id;
         callback( null, sessionId, part1, sdp1, part2, sdp2 ) ;
       }) ;
     },
